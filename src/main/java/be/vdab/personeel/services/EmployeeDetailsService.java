@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -21,15 +22,18 @@ import be.vdab.personeel.repositories.EmployeeRepository;
 
 @Service
 @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+@Primary
 public class EmployeeDetailsService implements UserDetailsService {
 
 	private static final Logger LOGGER
 	= LoggerFactory.getLogger(EmployeeDetailsService.class);
 	
-	@Autowired
-	private EmployeeRepository employeeRepository;
+	private final EmployeeRepository employeeRepository;
 	
-	public EmployeeDetailsService() { super(); }
+	@Autowired
+	public EmployeeDetailsService(EmployeeRepository employeeRepository) { super();
+		this.employeeRepository = employeeRepository;
+	}
 	
 	@Override
 	public UserDetails loadUserByUsername(final String emailAddress)

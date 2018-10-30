@@ -36,10 +36,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //			"ON jobtitels.id = werknemers.jobtitelid " +
 //			"WHERE werknemers.email = ?";
 	
-	@Autowired
-	private UserDetailsService userDetailsService;
+	private final UserDetailsService userDetailsService;
 	
-	public SecurityConfig() {}
+	@Autowired
+	public SecurityConfig(UserDetailsService userDetailsService) {
+		this.userDetailsService = userDetailsService;
+	}
 	
 //	@Bean
 //	public JdbcDaoImpl jdbcDaoImpl(final DataSource dataSource) {
@@ -69,13 +71,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
-	public void configure(final AuthenticationManagerBuilder auth)
-	throws Exception {
+	public void configure(final AuthenticationManagerBuilder auth) {
 		auth.authenticationProvider(authProvider());
 	}
 	
 	@Override
-	public void configure(final WebSecurity web) throws Exception {
+	public void configure(final WebSecurity web) {
 		web.ignoring()
 			.antMatchers("/resources/**", "/static/**")
 			.mvcMatchers("/images/**")

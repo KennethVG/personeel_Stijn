@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace='fragments::head(#{pageTitleSSN})'></head>
+<head th:replace='fragments::head(#{pageTitleSSN})'></head>
 <body>
-	<nav th:replace='fragments::menu'></nav>
-	
-	<h1 th:text="#{ssnOf} + ' ' + ${employee.firstName} + ' ' + ${employee.lastName}"></h1>
-	
-	<!-- <form th:action='@{/employees/{id}/ssn(id=${employee.id})}' method='post'
-		th:object='${socialSecurityNumberForm}'> -->
-	<form th:action='@{/employees/ssn}' method='post'
-		th:object='${socialSecurityNumberForm}'>
-		<label><span th:text='#{ssn}'></span>
-		<span th:if="${#fields.hasErrors('socialSecurityNumber')}" class='error'
-			th:errors='*{socialSecurityNumber}'></span>
-		<input th:field='*{socialSecurityNumber}' required autofocus>
-		</label>
-		
-		<input th:field='*{employee}' type='hidden'>
-		
-		<input type='submit' th:value='#{ssnSubmit}'>
-		<div th:if="${#fields.hasErrors('*')}" class="error">
-			<p th:each="err : ${#fields.errors('*')}" th:text='${err}'></p>
-		</div>
-	</form>
+
+
+<nav th:replace='fragments::menu'></nav>
+
+<h1 th:text="#{ssnOf} + ' ' + ${employee.firstName} + ' ' + ${employee.lastName}"></h1>
+
+<form th:action='@{/employees/{id}/ssn(id=${employee.id})}' method='post'
+      th:object='${socialSecurityNumberForm}'>
+    <label><span th:text='#{ssn}'></span>
+        <span th:if="${#fields.hasErrors('socialSecurityNumber')}" class='error'
+              th:errors='*{socialSecurityNumber}'></span>
+        <input th:field='*{socialSecurityNumber}' required autofocus>
+    </label>
+
+    <input th:field='*{date}' type='hidden'>
+
+    <input type='submit' th:value='#{ssnSubmit}'>
+
+    <div th:if='${#fields.hasGlobalErrors()}'>
+        <div class='fout' th:each='err : ${#fields.globalErrors()}'
+             th:text='${err}'></div>
+    </div>
+</form>
 </body>
 </html>

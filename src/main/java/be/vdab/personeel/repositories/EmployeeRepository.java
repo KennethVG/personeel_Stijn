@@ -12,13 +12,13 @@ import be.vdab.personeel.entities.JobTitle;
 public interface EmployeeRepository extends JpaRepository<Employee, Long>{
 
 	@EntityGraph(Employee.WITH_SUPERVISOR)
-	public Optional<Employee> findById(final long employeeId);
+	Optional<Employee> findById(final long employeeId);
 	
 	//@Query(Employee.HIGHEST_RANKING)
-	public Optional<Employee> findBySupervisorIsNull();
-	public Optional<Employee> findByEmailAddress(final String emailAddress);
+	Optional<Employee> findBySupervisorIsNull();
+	Optional<Employee> findByEmailAddress(final String emailAddress);
 	
-	public List<Employee> findAllBySupervisor(final Employee supervisor);
+	List<Employee> findAllBySupervisor(final Employee supervisor);
 	
-	public List<Employee> findAllByJobTitle(final JobTitle jobTitle);
+	List<Employee> findAllByJobTitle(final JobTitle jobTitle);
 }

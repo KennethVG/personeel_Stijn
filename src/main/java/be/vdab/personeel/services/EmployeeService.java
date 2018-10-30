@@ -10,12 +10,12 @@ import be.vdab.personeel.valueobjects.SocialSecurityNumber;
 
 public interface EmployeeService {
 
-	public Optional<Employee> read(final long employeeId);
+	Optional<Employee> read(final long employeeId);
 	
-	public Optional<Employee> findHighestRanking();
+	Optional<Employee> findHighestRanking();
 	
-	public List<Employee> findSubordinates(final Employee supervisor);
-	public List<Employee> findByJobTitle(final JobTitle jobTitle);
+	List<Employee> findSubordinates(final Employee supervisor);
+	List<Employee> findByJobTitle(final JobTitle jobTitle);
 	
 	void raiseSalary(final long employeeId, final BigDecimal raise);
 	void saveSSN(final long employeeId, final SocialSecurityNumber number);

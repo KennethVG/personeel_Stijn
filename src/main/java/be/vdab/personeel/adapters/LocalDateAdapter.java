@@ -7,12 +7,12 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 public class LocalDateAdapter extends XmlAdapter<String, LocalDate> {
 
 	@Override
-	public LocalDate unmarshal(String dateString) throws Exception {
+	public LocalDate unmarshal(String dateString) {
 		return LocalDate.parse(dateString);
 	}
 
 	@Override
-	public String marshal(LocalDate date) throws Exception {
+	public String marshal(LocalDate date) {
 		return date.toString();
 	}
 }

@@ -4,34 +4,37 @@ import javax.validation.constraints.NotNull;
 
 import be.vdab.personeel.constraints.SocialSecurityNumberConstraint;
 import be.vdab.personeel.constraints.SocialSecurityNumberFormConstraint;
-import be.vdab.personeel.entities.Employee;
 import be.vdab.personeel.valueobjects.SocialSecurityNumber;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 @SocialSecurityNumberFormConstraint
 public class SocialSecurityNumberForm {
 
 	@NotNull
-	private Employee employee;
+	@DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
+	private LocalDate date;
 	
 	@SocialSecurityNumberConstraint
 	private SocialSecurityNumber socialSecurityNumber;
 	
 	public SocialSecurityNumberForm() {}
 	public SocialSecurityNumberForm(
-			final Employee employee,
+			final LocalDate localDate,
 			final SocialSecurityNumber socialSecurityNumber) {
-		setEmployee(employee);
+		setDate(localDate);
 		setSocialSecurityNumber(socialSecurityNumber);
 	}
-	
-	public void setEmployee(final Employee employee) {
-		this.employee = employee;
+
+	public LocalDate getDate() {
+		return date;
 	}
-	
-	public Employee getEmployee() {
-		return employee;
+
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
-	
+
 	public void setSocialSecurityNumber(
 			final SocialSecurityNumber socialSecurityNumber) {
 		this.socialSecurityNumber = socialSecurityNumber;

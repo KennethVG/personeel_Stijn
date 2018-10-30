@@ -10,14 +10,15 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+@Target({TYPE, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-@Target({ TYPE, ANNOTATION_TYPE })
 @Constraint(validatedBy = SocialSecurityNumberFormConstraintValidator.class)
 public @interface SocialSecurityNumberFormConstraint {
-	
-	String message() default
-	"{be.vdab.personeel.constraints.SocialSecurityNumberFormConstraint.message}";
-	
-	Class<?>[] groups() default {};
-	Class<? extends Payload>[] payload() default {};
+
+    String message() default
+            "{be.vdab.personeel.constraints.SocialSecurityNumberFormConstraint.message}";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }

@@ -10,8 +10,6 @@ import javax.persistence.Transient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import be.vdab.personeel.entities.Employee;
-
 //https://vladmihalcea.com/how-to-map-java-and-sql-arrays-with-jpa-and-hibernate/
 //https://docs.jboss.org/hibernate/orm/5.3/javadocs/org/hibernate/type/descriptor/java/BigDecimalTypeDescriptor.html
 //https://docs.spring.io/spring/docs/3.2.0.RC1/reference/html/validation.html
@@ -109,11 +107,10 @@ public class SocialSecurityNumber implements Serializable {
 		LOGGER.debug("VALIDATING FORMAT FOR: " + toString());
 		return toString().matches(REGEX);
 	}
-	public boolean validate(final Employee employee) {
+	public boolean validate(final LocalDate date) {
 		if (!validateFormat()) return false;
 		
 		LOGGER.debug("STARTING VALIDATION");
-		final LocalDate date = employee.getBirthDate();
 		
 		int year = Integer.parseInt(parts[YEAR]);
 		int month = Integer.parseInt(parts[MONTH]);
@@ -174,6 +171,6 @@ public class SocialSecurityNumber implements Serializable {
 	
 	@Override
 	public int hashCode() {
-		return (int)(37 * getBaseNumberForValidation());
+		return (37 * getBaseNumberForValidation());
 	}
 }

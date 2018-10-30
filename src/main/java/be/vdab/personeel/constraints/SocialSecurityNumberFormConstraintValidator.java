@@ -17,11 +17,11 @@ ConstraintValidator<
 	public boolean isValid(
 			final SocialSecurityNumberForm form,
 			final ConstraintValidatorContext context) {
-		if (form.getEmployee() == null ||
+		if (form.getDate() == null ||
 				form.getSocialSecurityNumber() == null)
 			return true;
 		
-		return form.getSocialSecurityNumber().validate(form.getEmployee());
+		return form.getSocialSecurityNumber().validate(form.getDate());
 	}
 
 }
